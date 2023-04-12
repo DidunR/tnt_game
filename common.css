@@ -1,0 +1,10 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --text-color: rgb(208, 225, 245);
+    --button-color: rgb(85,84,96);
+}
