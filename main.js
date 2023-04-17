@@ -8,10 +8,17 @@ const defuseButton = document.querySelector(".defuse");
 
 const modal = document.querySelector('.modal');
 const closeBtn = document.querySelector('.close');
+const restartGame = document.querySelector(".modal");
 
+
+const clockSound = document.querySelector(".clock_sound");
+const audioBomb = document.querySelector(".bomb_explosion");
+const correctAnswer = document.querySelector(".correct_answer");
+const wrongAnswer = document.querySelector(".wrong_answer");
+const soundReset = document.querySelector(".sound_reset");
 
 // Задаємо початкові значення змінних
-let timeLeft = 10; // Задаємо початковий час
+let timeLeft = 30; // Задаємо початковий час
 let deminingCode = generateDeminingCode(); // Генеруємо випадкове шестизначне число
 let timerId;
 let enteredCode = "";
@@ -25,8 +32,8 @@ for (let i = 0; i < 10; i++) {
     numberDiv.innerText = i;
 
     // задаємо випадкову початкову позицію і швидкість для кожного числа
-    const startPosition = Math.random() * 60;
-    const speed = Math.random() * 9 + 10;
+    const startPosition = Math.random() * 55;
+    const speed = Math.random() * 6 + 3;
 
     // const visibilityRadius = Math.random() * 20 + 10;
 
@@ -59,6 +66,9 @@ for (let i = 0; i < 10; i++) {
 // Додаємо обробники подій
 resetButton.addEventListener("click", resetGame);
 defuseButton.addEventListener("click", checkCode);
+restartGame.addEventListener('click', function () {
+    location.reload();
+});
 
 // Функція для перезапуску гри
 function resetGame() {
@@ -66,22 +76,60 @@ function resetGame() {
     setEnteredCodeSpan.innerText = "";
     deminingCode = generateDeminingCode();
     setDeminingCodeSpan.innerText = deminingCode;
-    timeLeft = 30;
-    setTimeSpan.innerText = timeLeft;
-    clearInterval(timerId);
-    timerId = setInterval(countdown, 1000);
+    setEnteredCodeSpan.style.color = "white";
+    soundReset.play();
+    // timeLeft = 10;
+    // setTimeSpan.innerText = timeLeft;
+    // clearInterval(timerId);
+    // timerId = setInterval(countdown, 1000);
 }
 
 // Функція для перевірки введеного коду
 function checkCode() {
     if (setEnteredCodeSpan.innerText === deminingCode.toString()) {
         clearInterval(timerId);
-        alert("You defused the bomb!");
+        clockSound.pause();
+        correctAnswer.play();
+        setEnteredCodeSpan.style.color = "darkgreen";
+        showBombDefusalModal();
+
+        // alert("You defused the bomb!");
     } else {
-        alert("You failed to defuse the bomb!");
+        setEnteredCodeSpan.style.color = "red";
+        wrongAnswer.play();
+        // alert("You failed to defuse the bomb!");
     }
-    resetGame();
+    // resetGame();
 }
+
+
+
+
+
+function showBombDefusalModal() {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+
+    const modalContent = document.createElement('div');
+    modalContent.className = 'modal-content';
+
+    const message = document.createElement('p');
+    message.textContent = 'Розмінуйте вибухівку!';
+
+    const closeButton = document.createElement('button');
+    closeButton.textContent = 'Закрити';
+    closeButton.addEventListener('click', function () {
+        modal.remove();
+    });
+
+    modalContent.appendChild(message);
+    modalContent.appendChild(closeButton);
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+}
+
+
+
 
 
 
@@ -93,7 +141,8 @@ function countdown() {
     if (timeLeft === 0) {
         clearInterval(timerId);
         modal.style.display = 'block';
-        resetGame();
+        audioBomb.play();
+        // resetGame();
     }
 }
 
@@ -110,8 +159,7 @@ timerId = setInterval(countdown, 1000);
 setDeminingCodeSpan.innerText = deminingCode;
 
 
-const restartGame = document.querySelector(".modal");
-restartGame.addEventListener('click', function () {
-    location.reload();
-    console.log("Hello");
-});
+
+
+
+

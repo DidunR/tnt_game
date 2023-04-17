@@ -11,26 +11,35 @@
 </head>
 
 <body>
-    <div class="container">
-        <img class="background_image" src="img/background.jpg" alt="Background image">
-        <div class="information">
-            <button class="reset">RESET</button>
-            <button class="defuse">DEFUSE</button>
-            <span class="entered_code">Entered code</span>
-            <span class="set_entered_code"></span>
-            <span class="time">Time</span>
-            <span class="set_time"></span>
-            <span class="demining_code">Demining code</span>
-            <span class="set_demining_code"></span>
+    <section>
+        <div class="container">
+            <img class="background_image" src="img/background.jpg" alt="Background image">
+            <div class="information">
+                <button class="reset">RESET</button>
+                <button class="defuse">DEFUSE</button>
+                <span class="entered_code">Entered code</span>
+                <span class="set_entered_code"></span>
+                <span class="time">Time</span>
+                <span class="set_time"></span>
+                <span class="demining_code">Demining code</span>
+                <span class="set_demining_code"></span>
+            </div>
+            <div class="numbers"></div>
+            <div class="dynamite_container">
+                <img class="dynamite" src="/img/dynamite.png" alt="Dynamite">
+            </div>
+            <div class="modal">
+                <img class="broken_screen" src="img/broken_screen.jpg" alt="Broken screen">
+            </div>
+            <div>
+                <audio class="clock_sound" src="audio/clock.mp3" autoplay></audio>
+                <audio class="bomb_explosion" src="audio/bomb_explosion.mp3" preload="auto"></audio>
+                <audio class="correct_answer" src="audio/correct_answer.mp3"></audio>
+                <audio class="wrong_answer" src="audio/wrong_answer.mp3"></audio>
+                <audio class="sound_reset" src="audio/reset.mp3"></audio>
+            </div>
         </div>
-        <div class="numbers"></div>
-        <div class="dynamite_container">
-            <img class="dynamite" src="/img/dynamite.png" alt="Dynamite">
-        </div>
-        <div class="modal">
-            <img class="broken_screen" src="img/broken_screen.jpg" alt="Broken screen">
-        </div>
-    </div>
+    </section>
 
     <script src="main.js"></script>
 </body>

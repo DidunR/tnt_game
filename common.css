@@ -1,4 +1,5 @@
-
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Pixels&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Righteous&family=Rubik+Pixels&family=Tilt+Prism&display=swap");
 
 * {
     margin: 0;
@@ -8,5 +9,7 @@
 
 :root {
     --text-color: rgb(208, 225, 245);
-    --button-color: rgb(85,84,96);
+    --button-color: rgb(85,84,96);    
+    --button-font-family: "Rubik Pixels";
+    --number-font-family: "Righteous";
 }
