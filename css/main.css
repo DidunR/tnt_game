@@ -5,68 +5,6 @@
     display: none;
 }
 
-.introduction {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    background-image: url(img/background.jpg);
-}
-
-.description {
-    font-family: var(--button-font-family);
-    font-weight: bold;
-    font-size: xx-large;
-    text-align: center;
-    width: 60%;
-}
-
-.enter_name {
-    font-family: var(--number-font-family);
-    /* font-weight: bold; */
-    font-style: italic;
-    font-size: x-large;
-    text-align: center;
-    width: 60%;
-    margin-top: 50px;
-}
-
-.input {
-    background-color: var(--input-color);
-    height: 30px;
-    font-family: var(--number-font-family);
-    font-size: large;
-    text-align: center;
-    border-radius: 5px;
-    text-transform: uppercase;
-}
-
-.input::placeholder {
-    color: wheat;
-}
-
-.start_game_button {
-    width: 100px;
-    height: 100px;
-    background-color: red;
-    border-radius: 50%;
-    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.5),
-        0px 0px 20px 10px rgba(0, 0, 0, 0.3),
-        0px 0px 30px 15px rgba(0, 0, 0, 0.2),
-        0px 0px 40px 20px rgba(0, 0, 0, 0.1);
-    margin-top: 40px;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.start_game_button:hover {
-    transform: scale(1.1);
-}
-
 .information {
     margin-top: 20px;
     position: relative;
@@ -148,7 +86,6 @@
     top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
-
 }
 
 .dynamite {
@@ -177,7 +114,6 @@
 .number {
     margin-top: 18%;
     position: absolute;
-    /* left: -20px; */
     animation-name: move-right;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
@@ -185,8 +121,6 @@
     font-weight: bold;
     user-select: none;
     z-index: 1;
-    /* border: 1px solid;
-    border-radius: 50%; */
     width: 70px;
     height: 50px;
     display: flex;
