@@ -17,6 +17,21 @@ const correctAnswer = document.querySelector(".correct_answer");
 const wrongAnswer = document.querySelector(".wrong_answer");
 const soundReset = document.querySelector(".sound_reset");
 
+const switchPage = document.querySelector(".start_game_button");
+
+switchPage.addEventListener("click", startGame);
+
+//функція перемикання початкового екрану та старту гри
+function startGame() {
+    const container = document.querySelector(".container");
+    const inrtoduction = document.querySelector(".introduction");
+    inrtoduction.style.display = "none";
+    container.style.display = "block";
+    // Запускаємо таймер 
+    timerId = setInterval(countdown, 1000);
+    clockSound.play();
+}
+
 // Задаємо початкові значення змінних
 let timeLeft = 30; // Задаємо початковий час
 let deminingCode = generateDeminingCode(); // Генеруємо випадкове шестизначне число
@@ -84,6 +99,8 @@ function resetGame() {
     // timerId = setInterval(countdown, 1000);
 }
 
+
+
 // Функція для перевірки введеного коду
 function checkCode() {
     if (setEnteredCodeSpan.innerText === deminingCode.toString()) {
@@ -91,8 +108,6 @@ function checkCode() {
         clockSound.pause();
         correctAnswer.play();
         setEnteredCodeSpan.style.color = "darkgreen";
-        showBombDefusalModal();
-
         // alert("You defused the bomb!");
     } else {
         setEnteredCodeSpan.style.color = "red";
@@ -101,36 +116,6 @@ function checkCode() {
     }
     // resetGame();
 }
-
-
-
-
-
-function showBombDefusalModal() {
-    const modal = document.createElement('div');
-    modal.className = 'modal';
-
-    const modalContent = document.createElement('div');
-    modalContent.className = 'modal-content';
-
-    const message = document.createElement('p');
-    message.textContent = 'Розмінуйте вибухівку!';
-
-    const closeButton = document.createElement('button');
-    closeButton.textContent = 'Закрити';
-    closeButton.addEventListener('click', function () {
-        modal.remove();
-    });
-
-    modalContent.appendChild(message);
-    modalContent.appendChild(closeButton);
-    modal.appendChild(modalContent);
-    document.body.appendChild(modal);
-}
-
-
-
-
 
 
 
@@ -152,8 +137,7 @@ function generateDeminingCode() {
     return Math.floor(Math.random() * 900000 + 100000);
 }
 
-// Запускаємо таймер
-timerId = setInterval(countdown, 1000);
+
 
 // Виводимо випадкове шестизначне число на екран
 setDeminingCodeSpan.innerText = deminingCode;

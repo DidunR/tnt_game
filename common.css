@@ -9,7 +9,8 @@
 
 :root {
     --text-color: rgb(208, 225, 245);
-    --button-color: rgb(85,84,96);    
+    --button-color: rgb(85,84,96);
+    --input-color: rgb(71, 131, 71);
     --button-font-family: "Rubik Pixels";
     --number-font-family: "Righteous";
 }
