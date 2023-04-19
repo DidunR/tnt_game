@@ -5,8 +5,8 @@ const setDeminingCodeSpan = document.querySelector(".set_demining_code");
 const setEnteredCodeSpan = document.querySelector(".set_entered_code");
 const resetButton = document.querySelector(".reset");
 const defuseButton = document.querySelector(".defuse");
-const modal = document.querySelector('.modal');
-const closeBtn = document.querySelector('.close');
+const modal = document.querySelector(".modal");
+const closeBtn = document.querySelector(".close");
 const restartGame = document.querySelector(".modal");
 const clockSound = document.querySelector(".clock_sound");
 const audioBomb = document.querySelector(".bomb_explosion");
@@ -14,36 +14,11 @@ const correctAnswer = document.querySelector(".correct_answer");
 const wrongAnswer = document.querySelector(".wrong_answer");
 const soundReset = document.querySelector(".sound_reset");
 const switchPage = document.querySelector(".start_game_button");
+const numberSound = document.querySelector(".num_sound");
 const showResult = document.querySelector(".result");
 const container = document.querySelector(".container");
 const inrtoduction = document.querySelector(".introduction");
 const restartGameBtn = document.querySelector(".restart_game_button");
-
-
-
-
-
-// const recordName = document.querySelector(".result_table");
-
-// Отримуємо посилання на таблицю та тіло таблиці
-const recordsTable = document.querySelector(".result_table");
-const recordsTableBody = recordsTable.querySelector("tbody");
-
-// Отримуємо значення поля вводу
-const inputElement = document.querySelector(".input");
-const nameValue = inputElement.value;
-console.log(nameValue);
-
-// Знаходимо колонку з іменами та зберігаємо в неї значення поля вводу
-const nameColumnCells = recordsTableBody.querySelectorAll("td:nth-child(2)");
-nameColumnCells.forEach((cell) => {
-    if (cell.innerHTML === "") {
-        cell.innerHTML = nameValue;
-        return;
-    };
-});
-
-
 
 
 // Задаємо початкові значення змінних
@@ -63,6 +38,8 @@ function startGame() {
         enteredCode = "";
         setEnteredCodeSpan.innerText = "";
         setEnteredCodeSpan.style.color = "white";
+        deminingCode = generateDeminingCode();
+        setDeminingCodeSpan.innerText = deminingCode;
         // Запускаємо таймер 
         timeLeft = 30;
         setTimeSpan.innerText = timeLeft;
@@ -70,9 +47,9 @@ function startGame() {
         timerId = setInterval(countdown, 1000);
         clockSound.play();
     } else {
-        nameInput.classList.add('error');
+        nameInput.classList.add("error");
         setTimeout(() => {
-            nameInput.classList.remove('error');
+            nameInput.classList.remove("error");
         }, 2000);
     };
 };
@@ -91,6 +68,7 @@ for (let i = 0; i < 10; i++) {
     numberDiv.style.animationDuration = `${speed}s`;
     numberDiv.addEventListener("click", () => {
         setEnteredCodeSpan.innerText += i;
+        numberSound.play();
     });
     // додаємо обробник події для зміни курсора
     numberDiv.addEventListener("mouseenter", () => {
@@ -107,8 +85,8 @@ for (let i = 0; i < 10; i++) {
 resetButton.addEventListener("click", resetGame);
 defuseButton.addEventListener("click", checkCode);
 switchPage.addEventListener("click", startGame);
-restartGame.addEventListener('click', restartFunction);
-restartGameBtn.addEventListener('click', restartFunction);
+restartGame.addEventListener("click", restartFunction);
+restartGameBtn.addEventListener("click", restartFunction);
 
 // Виводимо випадкове шестизначне число на екран
 setDeminingCodeSpan.innerText = deminingCode;
@@ -135,11 +113,12 @@ function resetGame() {
 function checkCode() {
     if (setEnteredCodeSpan.innerText === deminingCode.toString()) {
         clearInterval(timerId);
-
-        console.log(setTimeSpan.innerText);
-
+        const nameInput = document.querySelector(".input");
+        const name = nameInput.value;
+        addRecord(name, (30 - setTimeSpan.innerText));
         clockSound.pause();
         correctAnswer.play();
+        showRecords();
         setEnteredCodeSpan.style.color = "darkgreen";
         container.style.display = "none";
         showResult.style.display = "flex";
@@ -155,7 +134,7 @@ function countdown() {
     setTimeSpan.innerText = timeLeft;
     if (timeLeft === 0) {
         clearInterval(timerId);
-        modal.style.display = 'block';
+        modal.style.display = "block";
         audioBomb.play();
     };
 };
@@ -165,3 +144,31 @@ function generateDeminingCode() {
     return Math.floor(Math.random() * 900000 + 100000);
 };
 
+//якщо є то витягує інфу якщо ні то створює новий масив
+const recordTable = JSON.parse(localStorage.getItem("records")) || [];
+
+// додати нову запис до масиву
+function addRecord(name, time) {
+    // додати нову запис
+    recordTable.push({ name: name, time: time });
+    // сортувати масив за показником часу
+    recordTable.sort((a, b) => a.time - b.time);
+    // якщо масив більше 5 елементів, обрізати його
+    if (recordTable.length > 5) {
+        recordTable.splice(5, recordTable.length - 5);
+    };
+    localStorage.setItem("records", JSON.stringify(recordTable));
+};
+
+
+//Функція запису результатів в таблицю
+function showRecords() {
+    const table = document.querySelector(".result_table");
+    table.innerHTML = "";
+    const tableHead = `<li class="li li_head"><div>Place</div><div>Name</div><div>Time</div></li>`;
+    const records = JSON.parse(localStorage.getItem("records"));
+    const tableHtml = records.reduce((sum, el, index) => {
+        return sum += `<li class="li"><div>${index + 1}</div><div>${el.name}</div><div>${el.time} s</div></li>`
+    }, tableHead);
+    table.innerHTML = tableHtml;
+}

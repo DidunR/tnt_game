@@ -16,22 +16,26 @@
 }
 
 .result_table {
-    border-collapse: collapse;
     width: 60%;
     margin-bottom: 10px;
+    list-style: none;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 30px;
 }
 
-th, td {
-    padding: 5px;
-    text-align: center;
+.li {
+    padding: 2px;
     border: 1px solid var(--table-border-color);
+    display: flex;
+    justify-content: space-between;
 }
 
-th {
-    background-color: var(--table-background-color);
-    font-weight: bold;
+.li div{
+    padding: 0 30px;
+}
+
+.li_head div{
+    padding: 0 10px;
 }
 
 .restart_game_button {
