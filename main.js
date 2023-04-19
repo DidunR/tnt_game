@@ -114,7 +114,7 @@ function checkCode() {
     if (setEnteredCodeSpan.innerText === deminingCode.toString()) {
         clearInterval(timerId);
         const nameInput = document.querySelector(".input");
-        const name = nameInput.value;
+        const name = nameInput.value.toUpperCase();
         addRecord(name, (30 - setTimeSpan.innerText));
         clockSound.pause();
         correctAnswer.play();
