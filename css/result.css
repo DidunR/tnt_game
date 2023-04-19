@@ -11,8 +11,9 @@
 }
 
 .table_name{
+    margin-top: 20px;
     font-family: var(--number-font-family);
-    font-size: large;
+    font-size: x-large;
 }
 
 .result_table {
@@ -31,11 +32,11 @@
 }
 
 .li div{
-    padding: 0 30px;
+    padding: 0 30px 0 70px;
 }
 
 .li_head div{
-    padding: 0 10px;
+    padding: 0 20px;
 }
 
 .restart_game_button {
